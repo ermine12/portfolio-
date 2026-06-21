@@ -1,0 +1,53 @@
+/* index.css */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body,
+#root {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: #FFEA00; /* Ferrari Yellow */
+}
+
+/* Typography Overlay */
+.typography-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 30%; /* Spanning the top 30% of the screen */
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Aligning to the very top edge */
+  pointer-events: none; /* Crucial: ensures we can interact with canvas beneath */
+  z-index: 10;
+}
+
+.typography-overlay h1 {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 900;
+  font-size: clamp(4rem, 15vw, 15rem);
+  line-height: 0.8;
+  color: #111; /* Dark contrasting color */
+  text-transform: uppercase;
+  letter-spacing: -0.05em;
+  margin: 0;
+  padding-top: 0;
+}
+
+/* Canvas loading fallback */
+.loading-fallback {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Oswald', sans-serif;
+  font-weight: 900;
+  font-size: 2rem;
+  color: #111;
+}
