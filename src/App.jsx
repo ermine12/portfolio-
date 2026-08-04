@@ -2,6 +2,8 @@ import { Suspense, useEffect, useMemo } from 'react'
 import * as THREE from 'three'
 import { Canvas, useThree, useFrame } from '@react-three/fiber'
 import { Environment, useGLTF, Html, Center, ScrollControls, useScroll } from '@react-three/drei'
+import { useControls } from 'leva'
+import { Driver } from './Driver'
 
 // Model component
 function Ferrari() {
@@ -29,21 +31,21 @@ export function CinematicCamera() {
   const { camera } = useThree();
   
   // Set wide-angle lens for aggressive car photography
-  camera.fov = 85;
+  camera.fov = 35;
   camera.updateProjectionMatrix();
 
-  // 1. Create a smooth curved track for the camera position
+  // 1. Camera position track
   const positionCurve = useMemo(() => new THREE.CatmullRomCurve3([
-    new THREE.Vector3(0.0, 0.8, -6.5), // Start: Rear
-    new THREE.Vector3(5.0, 0.5, -2.0), // Mid: Sweeping wider along the side
-    new THREE.Vector3(0.0, 0.15, 5.0)  // End: Low front wing
+    new THREE.Vector3(0.0, 0.8, -6.5),  // Start: Rear three-quarter
+    new THREE.Vector3(5.0, 0.5, -2.0),  // Mid: Side profile sweep
+    new THREE.Vector3(0.0, 0.9,  1.0),  // End: Just behind cockpit, at helmet height
   ]), []);
 
-  // 2. Create a smooth curved track for where the camera is looking
+  // 2. Look-at target track
   const lookCurve = useMemo(() => new THREE.CatmullRomCurve3([
-    new THREE.Vector3(0.0, 0.6, 0.0), // Start looking at rear axis
-    new THREE.Vector3(0.0, 0.4, 0.0), // Look at cockpit as we pass
-    new THREE.Vector3(0.0, 0.2, 2.0)  // Finish looking up the nose cone
+    new THREE.Vector3(0.0, 0.6,  0.0),  // Start: looking at engine cover
+    new THREE.Vector3(0.0, 0.4,  0.0),  // Mid: looking at cockpit
+    new THREE.Vector3(0.0, 0.1,  0.0),  // End: looking at helmet
   ]), []);
 
   const targetPos = new THREE.Vector3();
@@ -88,6 +90,13 @@ export default function App() {
             <CinematicCamera />
           </ScrollControls>
           
+          {/* Driver locked in final position */}
+          <Driver 
+            position={[0.0, -1.0, 0.0]} 
+            rotation={[0, 0, 0]} 
+            scale={1} 
+          />
+
           <Environment preset="studio" />
           
           {/* Glowing rain light at the rear */}
@@ -105,3 +114,4 @@ export default function App() {
 
 // Preload the model
 useGLTF.preload('/ferrari_f1_2019-v1.glb')
+
