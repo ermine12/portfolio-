@@ -49,9 +49,10 @@ export default function DetectiveBoard() {
 
         {/* NODE 1: Center (The Suspect) */}
         <TweakedHtml 
-          name="Suspect Polaroid" 
-          defaultPosition={[0, 0, 0.5]} 
+          name="Suspect Polaroid v3" 
+          defaultPosition={[0, 5, 0.5]} 
           defaultRotation={[0, 0, 0]}
+          defaultScale={5}
         >
           <div 
             className="board-node polaroid"
@@ -73,9 +74,10 @@ export default function DetectiveBoard() {
 
         {/* NODE 2: Top Left (Tech Evidence) */}
         <TweakedHtml 
-          name="Tech Folder" 
-          defaultPosition={[-1.5, 1.5, 0.5]} 
+          name="Tech Folder v3" 
+          defaultPosition={[-18, 15, 0.5]} 
           defaultRotation={[0, 0, 0]}
+          defaultScale={5}
         >
           <div 
             className="board-node manila-folder"
@@ -96,9 +98,10 @@ export default function DetectiveBoard() {
 
         {/* NODE 3: Bottom Right (Training Dossier) */}
         <TweakedHtml 
-          name="Training Cards" 
-          defaultPosition={[1.5, -1.0, 0.5]} 
+          name="Training Cards v3" 
+          defaultPosition={[18, -10, 0.5]} 
           defaultRotation={[0, 0, 0]}
+          defaultScale={5}
         >
           <div 
             className="board-node index-card-stack"
@@ -122,9 +125,10 @@ export default function DetectiveBoard() {
 
         {/* NODE 4: Bottom Left (Leadership Pattern) */}
         <TweakedHtml 
-          name="Leadership News" 
-          defaultPosition={[-1.5, -1.0, 0.5]} 
+          name="Leadership News v3" 
+          defaultPosition={[-18, -10, 0.5]} 
           defaultRotation={[0, 0, 0]}
+          defaultScale={5}
         >
           <div 
             className="board-node newspaper-clipping"
@@ -145,10 +149,10 @@ export default function DetectiveBoard() {
 
         {/* NODE 5: Hobbies (On the stand) */}
         <TweakedHtml 
-          name="Hobbies Button (Top Stand)" 
-          defaultPosition={[0, 3.2, 0.2]} 
+          name="Hobbies Button v3" 
+          defaultPosition={[0, 42, -5]} 
           defaultRotation={[-0.2, 0, 0]}
-          defaultScale={0.15}
+          defaultScale={6}
         >
           <Link 
             to="/hobbies"
