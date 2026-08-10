@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Canvas } from '@react-three/fiber';
-import { OrbitControls, Environment, Html } from '@react-three/drei';
+import { OrbitControls, Environment, Html, Center } from '@react-three/drei';
 import { useControls } from 'leva';
 import { Board } from './Board';
 import './DetectiveBoard.css';
 
 // A helper to make tweaking easier
-function TweakedHtml({ name, defaultPosition, defaultRotation, children, transform = true, ...props }) {
+function TweakedHtml({ name, defaultPosition, defaultRotation, defaultScale = 0.1, children, transform = true, ...props }) {
   const { position, rotation, scale } = useControls(name, {
     position: defaultPosition,
     rotation: defaultRotation,
-    scale: 1,
+    scale: defaultScale,
   });
 
   return (
@@ -20,7 +20,6 @@ function TweakedHtml({ name, defaultPosition, defaultRotation, children, transfo
       position={position} 
       rotation={rotation} 
       scale={scale} 
-      distanceFactor={5} // Keep elements scalable with distance
       {...props}
     >
       {children}
@@ -37,18 +36,21 @@ export default function DetectiveBoard() {
 
   return (
     <div className="board-container" style={{ width: '100vw', height: '100vh', background: '#222' }}>
-      <Canvas camera={{ position: [0, 0, 5], fov: 50 }}>
-        <OrbitControls makeDefault minDistance={2} maxDistance={10} />
+      <Canvas camera={{ position: [0, 0, 15], fov: 50 }}>
+        <OrbitControls makeDefault minDistance={2} maxDistance={50} />
         <Environment preset="city" />
-        <ambientLight intensity={0.5} />
+        <ambientLight intensity={1.5} />
+        <directionalLight position={[10, 10, 10]} intensity={1} />
         
-        {/* The 3D Board */}
-        <Board />
+        {/* The 3D Board, centered and scaled up if it was too small */}
+        <Center>
+          <Board scale={10} />
+        </Center>
 
         {/* NODE 1: Center (The Suspect) */}
         <TweakedHtml 
-          name="Suspect Node" 
-          defaultPosition={[0, 0, 0.2]} 
+          name="Suspect Polaroid" 
+          defaultPosition={[0, 0, 0.5]} 
           defaultRotation={[0, 0, 0]}
         >
           <div 
@@ -71,8 +73,8 @@ export default function DetectiveBoard() {
 
         {/* NODE 2: Top Left (Tech Evidence) */}
         <TweakedHtml 
-          name="Tech Evidence" 
-          defaultPosition={[-1.5, 1, 0.2]} 
+          name="Tech Folder" 
+          defaultPosition={[-1.5, 1.5, 0.5]} 
           defaultRotation={[0, 0, 0]}
         >
           <div 
@@ -94,8 +96,8 @@ export default function DetectiveBoard() {
 
         {/* NODE 3: Bottom Right (Training Dossier) */}
         <TweakedHtml 
-          name="Training Dossier" 
-          defaultPosition={[1.5, -1, 0.2]} 
+          name="Training Cards" 
+          defaultPosition={[1.5, -1.0, 0.5]} 
           defaultRotation={[0, 0, 0]}
         >
           <div 
@@ -120,8 +122,8 @@ export default function DetectiveBoard() {
 
         {/* NODE 4: Bottom Left (Leadership Pattern) */}
         <TweakedHtml 
-          name="Leadership Pattern" 
-          defaultPosition={[-1.5, -1, 0.2]} 
+          name="Leadership News" 
+          defaultPosition={[-1.5, -1.0, 0.5]} 
           defaultRotation={[0, 0, 0]}
         >
           <div 
@@ -143,9 +145,10 @@ export default function DetectiveBoard() {
 
         {/* NODE 5: Hobbies (On the stand) */}
         <TweakedHtml 
-          name="Hobbies Link" 
-          defaultPosition={[0, -2.5, 0.5]} 
+          name="Hobbies Button (Top Stand)" 
+          defaultPosition={[0, 3.2, 0.2]} 
           defaultRotation={[-0.2, 0, 0]}
+          defaultScale={0.15}
         >
           <Link 
             to="/hobbies"
