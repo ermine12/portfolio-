@@ -1,3 +1,14 @@
 node_modules
 dist
-.envpublic/
+dist-ssr
+*.local
+.env
+.env.*
+!.env.example
+.DS_Store
+*.glb
+*.gltf
+public/images/
+public/*.glb
+public/*.gltf
+.qodo/
