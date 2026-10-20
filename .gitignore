@@ -12,3 +12,8 @@ public/images/
 public/*.glb
 public/*.gltf
 .qodo/
+
+# Root-level assets (kept outside the project)
+ermias-avatar.png
+workspace-clean.jpg
+Ermias_Simegne_CV.docx

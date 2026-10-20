@@ -1,0 +1,180 @@
+@import "tailwindcss";
+
+/* ─── Custom Theme ─── */
+@theme inline {
+  --color-background: #070707;
+  --color-foreground: #ededed;
+  --color-studio-black: #070707;
+  --color-board-white: #e8e4dc;
+  --color-board-border: #c9c3b8;
+  --color-crimson: #c8321e;
+  --color-crimson-dark: #9a2416;
+  --color-sticky-yellow: #fef08a;
+  --color-sticky-shadow: #e5d97a;
+  --color-emerald-pulse: #34d399;
+  --color-glass-bg: rgba(23, 23, 23, 0.75);
+  --color-glass-border: rgba(255, 255, 255, 0.15);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+  --font-marker: var(--font-marker);
+}
+
+/* ─── Base ─── */
+html,
+body {
+  background-color: #070707;
+  color: #ededed;
+  overflow-x: hidden;
+  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+  scroll-behavior: auto; /* GSAP controls scrolling */
+}
+
+/* ─── Custom Scrollbar ─── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #333 #0a0a0a;
+}
+
+/* ─── Marker Text Utility ─── */
+.marker-text {
+  font-family: var(--font-marker), cursive;
+  text-shadow:
+    1px 1px 0 rgba(0, 0, 0, 0.08),
+    2px 2px 4px rgba(0, 0, 0, 0.04);
+  letter-spacing: 0.01em;
+}
+
+.marker-text-dark {
+  font-family: var(--font-marker), cursive;
+  color: #2d2a26;
+  text-shadow:
+    1px 1px 0 rgba(0, 0, 0, 0.06),
+    0 0 8px rgba(0, 0, 0, 0.03);
+}
+
+/* ─── Sticky Note ─── */
+.sticky-note {
+  background: #fef08a;
+  color: #2d2a26;
+  box-shadow:
+    2px 4px 12px rgba(0, 0, 0, 0.18),
+    0 1px 3px rgba(0, 0, 0, 0.12),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.04);
+  font-family: var(--font-marker), cursive;
+  position: relative;
+}
+
+.sticky-note::before {
+  content: "";
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 12px;
+  background: rgba(200, 195, 180, 0.55);
+  border-radius: 1px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* ─── Pushpin ─── */
+.pushpin::before {
+  content: "📌";
+  position: absolute;
+  top: -10px;
+  left: 12px;
+  font-size: 18px;
+  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.3));
+  z-index: 5;
+}
+
+/* ─── Glassmorphism ─── */
+.glass {
+  background: rgba(23, 23, 23, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.glass-dock {
+  background: rgba(23, 23, 23, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* ─── Whiteboard Surface ─── */
+.whiteboard-surface {
+  background-color: #e8e4dc;
+  background-image: radial-gradient(
+    ellipse at 50% 0%,
+    rgba(255, 248, 231, 0.95) 0%,
+    rgba(215, 210, 200, 0.88) 55%,
+    rgba(40, 38, 35, 0.65) 100%
+  );
+  box-shadow:
+    inset 0 0 60px rgba(0, 0, 0, 0.15),
+    inset 0 0 120px rgba(0, 0, 0, 0.05);
+}
+
+/* ─── Mono Text (tech badges) ─── */
+.mono-text {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.7rem;
+  letter-spacing: -0.02em;
+}
+
+/* ─── Pulsing Dot Animation ─── */
+@keyframes pulse-emerald {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.3);
+  }
+}
+
+.pulse-dot {
+  animation: pulse-emerald 2s ease-in-out infinite;
+}
+
+/* ─── Architecture Flow Arrow ─── */
+.flow-arrow {
+  color: #888;
+  font-family: var(--font-mono), monospace;
+  font-size: 0.75rem;
+}
+
+/* ─── Project Card Hover ─── */
+.project-card {
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+
+.project-card:hover {
+  box-shadow:
+    0 0 20px rgba(200, 50, 30, 0.25),
+    0 0 40px rgba(200, 50, 30, 0.1);
+  transform: translateY(-2px);
+}
